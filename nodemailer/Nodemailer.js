@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer')
 const sendEmail = async(options)=>{
 
 
-console.log(12)
+
     let transporter = nodemailer.createTransport({
   
         
@@ -17,7 +17,7 @@ console.log(12)
           pass:"passwordReset@921",
         },
       });
-console.log(23)
+
 
       const mailOptions = ({
           from:"passwordReset921@hotmail.com",
@@ -25,10 +25,9 @@ console.log(23)
           subject:options.subject,
          text:options.message
       })
-      console.log(34)
+    
 
       await transporter.sendMail(mailOptions)
-      console.log(45)
 
 }
 

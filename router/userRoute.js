@@ -11,28 +11,28 @@ const generateToken = require('../utils/generateToken')
 
 router.post('/signup',async(req,res)=>{
     const{email,password,name,mobileNumber} = req.body
-console.log(mobileNumber)
+
     if(!name ||!email || !password ||!mobileNumber){
         res.status(400);
         throw new Error("please enter all fields")
     }
-    console.log(1)
+   
     const userExists = await User.findOne({email})
-console.log(2)
+
     if(userExists){
         res.status(400).json({
             message:"user already exist"
         })
         return 
     }
-    console.log(3)
+ 
     const user = await User.create({
         email,
         password,
         name,
         mobileNumber
     })
-    console.log(4)
+   
 
     if(user){
         res.status(200).json({
@@ -43,7 +43,7 @@ console.log(2)
            
             token:generateToken(user._id)
         })
-        console.log(5)
+        
     }
 
     else{
@@ -62,7 +62,7 @@ console.log(2)
 
 
 router.post('/signin',async(req,res)=>{
-    console.log(2333)
+
     const{email,password} = req.body
 
     if(!email || !password ){
@@ -134,7 +134,7 @@ router.post('/forgotPassword',async(req,res)=>{
                subject:"Password Recovery",
                message:message
            });
-           console.log("In process")
+      
    
            res.status(200).json({
                success:true,
@@ -181,7 +181,7 @@ try {
           })
         }
         else{
-            console.log(5)
+
             let user = await User.findOne({email:req.body.email})
             user.password = req.body.password
             user.save()
